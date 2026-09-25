@@ -5,7 +5,7 @@
 |              |                                                     |
 | ------------ | --------------------------------------------------- |
 | **Prodotto** | ScuolaChill                                         |
-| **Team**     | Andrea Rossi — sviluppo individuale (max 1 persona) |
+| **Team**     | Andrea Rossi — sviluppo individuale                 |
 | **Autori**   | Andrea Rossi                                        |
 | **Versione** | 0.1                                                 |
 | **Data**     | 23/09/2026                                          |
@@ -79,48 +79,25 @@ Fascia critica identificata: più classi che aprono una verifica nello stesso or
 
 ---
 
-## Panoramica e casi d'uso
-
-ScuolaChill è il posto unico dove la scuola vive online: il Direttore crea le classi e gli account, il docente carica il materiale delle sue materie e mette voti alle verifiche che prepara, lo studente trova tutto quello che gli serve per studiare e sapere come sta andando — senza email sparse, senza dover chiedere in giro.
-
-### User flow e scenari
+## User flow e User story
 
 **Storia: DIR-01 · Creare account docente**
 
+> Come **Direttore** voglio **creare gli account dei docenti** così da **dare al personale l'accesso al sistema con il ruolo corretto**. (DIR-01)
+
 *User flow*
 1. Il Direttore accede a ScuolaChill e apre la sezione "Docenti"
-2. Seleziona "Nuovo docente" e compila nome, cognome, email, materie
+2. Seleziona "Nuovo docente" e compila nome, cognome, email, materie, classi
 3. Conferma la creazione
-4. Il sistema crea l'account, lo mostra nell'elenco docenti e invia una email con le credenziali di primo accesso
+4. Il sistema crea l'account, lo mostra nell'elenco docenti e invia una email con conferma di creazione account e le credenziali di primo accesso da cambaire.
 
 *Scenario principale.* Il Direttore ha appena assunto un nuovo docente di elettrotecnica: in due minuti crea l'account, il docente riceve l'email e può accedere lo stesso giorno.
 
 *Scenari alternativi.* Se l'email inserita esiste già, il sistema blocca la creazione e indica l'errore prima di salvare nulla. Se l'invio dell'email fallisce (servizio esterno non raggiungibile), l'account viene comunque creato con stato "email da rinviare", visibile al Direttore, che può farla reinviare senza dover ricreare l'account.
 
-**Storia: DIR-03 · Creare classi e comporle**
-
-*User flow*
-1. Il Direttore crea una nuova classe (es. "1A Informatica")
-2. Aggiunge gli studenti alla classe dall'elenco degli account esistenti
-3. Assegna ai docenti le materie che insegnano in quella classe
-4. La classe compare per ciascun docente coinvolto, filtrata per la sola materia assegnata
-
-*Scenario principale.* A inizio anno il Direttore compone le 35 classi in una mattina, assegnando circa 380 studenti e i relativi docenti per materia.
-
-*Scenari alternativi.* Se uno studente è già assegnato a un'altra classe, il Direttore esegue un trasferimento esplicito (lo studente esce dalla vecchia classe, entra nella nuova, lo storico di voti/verifiche resta collegato al periodo in cui era in quella classe) — non è ammesso l'inserimento silenzioso in due classi contemporaneamente.
-
-**Storia: DIR-04 · Vedere tutto**
-
-*User flow*
-1. Il Direttore apre la dashboard
-2. Vede classi con numero studenti, docenti con materie assegnate, andamento aggregato dei voti
-3. Naviga in elenchi paginati se i dati superano una pagina
-
-*Scenario principale.* Prima di un colloquio con una famiglia, il Direttore controlla in trenta secondi l'andamento generale di una classe senza aprire ogni singola materia.
-
-*Scenari alternativi.* Se il Direttore prova ad accedere alla dashboard da un account Docente o Studente (es. link condiviso per errore), l'operazione viene negata con un messaggio chiaro, non con un errore generico.
-
 **Storia: DOC-01 · Caricare materiale didattico**
+
+> Come **Docente** voglio **caricare il materiale didattico per le mie materie e classi** così da **metterlo a disposizione degli studenti in un posto solo**. (DOC-01)
 
 *User flow*
 1. Il Docente apre una classe/materia fra quelle assegnate
@@ -131,29 +108,9 @@ ScuolaChill è il posto unico dove la scuola vive online: il Direttore crea le c
 
 *Scenari alternativi.* Se il docente prova a caricare materiale per una classe/materia a cui non è assegnato, l'operazione viene negata. Se il file supera la dimensione massima consentita, il sistema lo segnala prima di iniziare l'upload, non a metà caricamento.
 
-**Storia: DOC-02 · Creare le proprie verifiche**
-
-*User flow*
-1. Il Docente crea una verifica con titolo, materia, classe, data e contenuto
-2. La verifica compare agli studenti della classe alla data prevista
-3. Il docente può modificarla finché non è stata svolta
-
-*Scenario principale.* Il docente prepara la verifica di fine modulo una settimana prima, la programma per il lunedì successivo alle 8:00.
-
-*Scenari alternativi.* Se almeno uno studente ha già consegnato la verifica, il docente può ancora correggere refusi o note, ma non alterare il contenuto già consegnato dagli studenti (altrimenti invaliderebbe le risposte già date). Se la verifica appartiene a un collega, l'operazione di modifica viene negata.
-
-**Storia: DOC-03 · Assegnare i voti**
-
-*User flow*
-1. Il Docente apre l'elenco delle consegne di una verifica
-2. Assegna un voto (scala 1-10, un decimale ammesso, es. 6,5) a ogni studente
-3. Il voto è visibile allo studente nella sua pagina voti, raggruppato per materia
-
-*Scenario principale.* Dopo aver corretto le verifiche del weekend, il docente inserisce i voti lunedì mattina; gli studenti li vedono subito.
-
-*Scenari alternativi.* Se il docente inserisce un voto fuori scala (es. 15), il sistema lo rifiuta con un messaggio chiaro e non salva nulla. Se la verifica appartiene a un altro docente, l'assegnazione voto viene negata.
-
 **Storia: STU-01 · Consultare il materiale didattico**
+
+> Come **Studente** voglio **consultare il materiale caricato da ogni docente delle mie materie** così da **avere tutto ciò che serve per studiare in un unico posto**. (STU-01)
 
 *User flow*
 1. Lo Studente apre la sua classe e seleziona una materia
@@ -163,47 +120,42 @@ ScuolaChill è il posto unico dove la scuola vive online: il Direttore crea le c
 
 *Scenari alternativi.* Se lo studente prova ad accedere (es. via link diretto) a materiale di una classe diversa dalla propria, l'accesso viene negato.
 
-**Storia: STU-02 · Svolgere una verifica**
+**Storia: STU-04 · Vedere la media per materia**
 
-*User flow*
-1. Lo Studente apre la verifica disponibile per la sua classe
-2. Compila e consegna
-3. Il sistema salva le risposte e segna la verifica come consegnata
+> Come **Studente** voglio **vedere la media dei miei voti in ciascuna materia** così da **capire subito dove sono in difficoltà senza fare i conti a mano**. (STU-04)
 
-*Scenario principale.* Tre classi iniziano la stessa verifica alle 8:00: ogni studente consegna entro l'ora prevista, il sistema regge il picco di consegne simultanee (caso guida per la stima del carico).
-
-*Scenari alternativi.* Se lo studente ha già consegnato, un secondo tentativo di svolgimento viene negato (niente doppia consegna). Se la connessione cade a metà, la consegna non deve andare persa in modo silenzioso: il comportamento esatto (salvataggio incrementale vs. invio unico) va deciso nella Seconda parte, sez. 4.2/4.5. Se la verifica appartiene a un'altra classe, l'accesso viene negato.
-
-**Storia: STU-03 · Consultare i propri voti**
+*Acceptance criteria*
+- AC-01 · Dato che ho almeno un voto in una materia, Quando apro la pagina dei voti, Allora vedo la media di quella materia calcolata su tutti i suoi voti.
+- AC-02 · Dato che non ho ancora voti in una materia, Quando apro la pagina dei voti, Allora la materia compare senza media (non "0").
+- AC-03 · Dato che un docente registra o modifica un voto, Quando riapro la pagina, Allora la media è aggiornata.
 
 *User flow*
 1. Lo Studente apre la pagina "I miei voti"
-2. Vede i voti raggruppati per materia, con l'indicazione della verifica di provenienza
+2. Vede l'elenco delle materie, ciascuna con la propria media e i singoli voti
+3. Apre una materia per vedere da quali verifiche provengono i voti
 
-*Scenario principale.* A fine quadrimestre lo studente controlla dallo smartphone come sta andando in ciascuna materia prima del colloquio con i genitori.
+*Scenario principale.* Prima del colloquio con i genitori, uno studente controlla dallo smartphone che la media di matematica è sotto la sufficienza e decide di recuperare prima della prossima verifica.
 
-*Scenari alternativi.* Se lo studente prova ad accedere ai voti di un compagno (es. modificando un parametro nell'URL), l'operazione viene negata: l'autorizzazione è verificata lato backend, non solo nascosta nell'interfaccia.
+*Scenari alternativi.* Se una materia non ha ancora voti, compare senza media. Se il docente corregge un voto, la media si aggiorna alla riapertura della pagina.
 
----
+**Storia: UTE-01 · Cambiare la password al primo accesso**
 
-## Requisiti funzionali
+> Come **utente (Direttore, Docente o Studente)** voglio **sostituire la password temporanea ricevuta via email con una mia** così da **essere l'unico a conoscere le mie credenziali**. (UTE-01)
 
-### Le user story della traccia
+*Acceptance criteria*
+- AC-01 · Dato che accedo con le credenziali temporanee, Quando effettuo il primo login, Allora devo impostare una nuova password prima di usare il sistema.
+- AC-02 · Dato che la nuova password non rispetta le regole minime (lunghezza, uguale alla temporanea), Quando confermo, Allora ricevo un errore chiaro e la password non cambia.
+- AC-03 · Dato che non ho ancora cambiato la password, Quando provo a chiamare qualunque altra API, Allora l'operazione viene negata.
 
-| ID | Storia | AC aggiunti dal team | Note |
-| --- | --- | --- | --- |
-| DIR-01 | Creare account docente | — | Vedi user flow sopra |
-| DIR-02 | Creare account studente | — | Speculare a DIR-01, stesse regole di unicità email e di autorizzazione |
-| DIR-03 | Creare classi e comporle | AC-04 · Dato che uno studente è già assegnato a una classe, Quando il Direttore lo assegna a un'altra classe, Allora avviene un trasferimento esplicito (uscita dalla vecchia classe, ingresso nella nuova, storico voti/verifiche conservato) — non è ammesso l'inserimento silenzioso in due classi | Decisione presa: trasferimento esplicito, non blocco rigido (vedi user flow sopra) |
-| DIR-04 | Vedere tutto | — | Vedi user flow sopra |
-| DOC-01 | Caricare materiale didattico | — | Vedi user flow sopra |
-| DOC-02 | Creare le proprie verifiche | AC-04 · Dato che almeno uno studente ha già consegnato la verifica, Quando il docente la modifica, Allora può modificare solo aspetti che non invalidano le consegne già fatte (es. note), non il contenuto già consegnato | Decisione presa: la verifica si "blocca" parzialmente dopo la prima consegna (vedi user flow sopra) |
-| DOC-03 | Assegnare i voti | AC-04 · Dato che sto assegnando un voto, Quando inserisco un valore, Allora la scala valida è 1-10 con un decimale ammesso (es. 6,5), coerente con il sistema scolastico italiano | Decisione presa: scala 1-10 (vedi user flow sopra) |
-| STU-01 | Consultare il materiale didattico | — | Vedi user flow sopra |
-| STU-02 | Svolgere una verifica | — | Comportamento in caso di caduta di connessione a metà consegna da definire in Seconda parte |
-| STU-03 | Consultare i propri voti | — | Vedi user flow sopra |
+*User flow*
+1. L'utente riceve l'email con le credenziali temporanee e accede a ScuolaChill
+2. Il sistema lo porta subito alla schermata "Imposta la tua password"
+3. Inserisce la nuova password due volte e conferma
+4. Il sistema salva la password e lo porta alla sua pagina iniziale
 
-> Gli acceptance criteria della traccia restano il minimo verificabile e sono richiamati per ID in questa tabella; quelli aggiunti dal team sono scritti per esteso nella colonna dedicata, nello stesso formato *Dato che / Quando / Allora*.
+*Scenario principale.* Uno studente del primo anno riceve l'email, accede dallo smartphone, sceglie una password personale e da quel momento entra solo con quella.
+
+*Scenari alternativi.* Se la nuova password è troppo corta o uguale alla temporanea, il sistema la rifiuta con un messaggio chiaro. Se l'utente prova ad aprire altre pagine o API prima di averla cambiata, il backend nega l'operazione: il blocco non dipende solo dall'interfaccia.
 
 ---
 
