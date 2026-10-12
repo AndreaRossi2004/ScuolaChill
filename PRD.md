@@ -168,38 +168,6 @@ Fascia critica identificata: più classi che aprono una verifica nello stesso or
 | NFR-10 | È facile per i ragazzi del primo anno | Almeno il 90% completa una verifica senza aiuto | Durante il collaudo, alla prima volta | STU-02 |
 | NFR-11 | Gli elenchi lunghi sono leggibili | 20 elementi per pagina | Quando un elenco ha più elementi | DIR-04, STU-01, STU-03 |
 | NFR-12 | I dati dei minorenni sono protetti | Dati conservati nell'Unione Europea e comunicazioni sempre cifrate | Sempre | STU-03, DIR-04 |
-
----
-
-## Assunzioni, vincoli e dipendenze
-
-### Assunzioni
-
-- La scuola ha 412 studenti, 50 docenti, 23 classi e lezioni dalle 8:10 alle 13:20 e dalle 14:00 alle 16:00 (dati forniti dalla scuola, vedi "La scuola che avete immaginato").
-- Nello stesso momento è connesso circa il 10-15% degli utenti; nel picco delle verifiche iniziano insieme fino a 3 classi.
-- Gli studenti usano in prevalenza lo smartphone, con Wi-Fi scolastico condiviso o rete mobile.
-- Direttore, un docente e i ragazzi del primo anno sono disponibili per il collaudo.
-
-### Vincoli
-
-- Il progetto è sviluppato da una sola persona, con livello medio-basso: le soluzioni più semplici hanno la precedenza.
-- Il PRD deve essere validato prima di scrivere codice.
-- Tutto il traffico viaggia su HTTPS e il controllo dei ruoli sta nel backend.
-- Il sistema deve essere online e raggiungibile pubblicamente per il collaudo.
-- Budget ipotizzato: al massimo ~80 € al mese IVA inclusa.
-- I dati sono di minorenni: devono restare nell'Unione Europea.
-
-### Dipendenze
-
-- Un servizio esterno per l'invio delle email (Brevo): se non risponde, gli inviti vanno rinviati.
-- Il provider cloud (Azure) per applicazione, database e archivio dei file.
-- GitHub per il codice e per la pubblicazione automatica.
-- I dati reali dell'istituto (studenti, classi, orari) da confermare con la scuola.
-
-### Requisiti impliciti emersi dalle interviste
-
-Da compilare: finora non è stata fatta nessuna intervista, quindi qui non è stato scritto nulla. Da raccogliere con il Direttore, un docente e alcuni ragazzi del primo anno prima di chiudere il PRD.
-
 ---
 
 # Seconda parte · Il come
